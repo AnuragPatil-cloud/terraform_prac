@@ -58,7 +58,7 @@ wget -O - https://apt.releases.hashicorp.com/gpg | \
 sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gp
 ```
 <br>
------
+
 
 ### 2️⃣ Add Official Repository
 ```bash
