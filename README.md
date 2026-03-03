@@ -67,16 +67,19 @@ sudo tee /etc/apt/sources.list.d/hashicorp.list
 ```
 <br>
 ###3️⃣ Install Terraform
+
 ```bash
 sudo apt update
 sudo apt install terraform -y
 ```
 <br>
 ###4️⃣ Verify Installation
+
 ```bash
 terraform -version
 ```
 <br>
+
 ###🚀 Usage
 Initialize Terraform
 ```bash
