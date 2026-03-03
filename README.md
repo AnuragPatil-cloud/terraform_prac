@@ -105,7 +105,59 @@ Destroy Infrastructure
 ```bash
 terraform destroy
 ```
+---
+ ## Enlist the Blocks used in Terraform Language
+###Terraform has multiple blocks (building units):
 
+### provider → Defines the provider (AWS, Azure, etc.)
+```bash
+provider "aws" {
+  region = "us-east-1"
+}
+```
+
+### resource → Defines infrastructure resources.
+```bash
+resource "aws_instance" "example" {
+  ami           = "ami-12345"
+  instance_type = "t2.micro"
+}
+```
+
+###variable → Input values (like parameters).
+```bash
+variable "region" {
+  default = "us-east-1"
+}
+```
+
+### output → Shows values after deployment.
+```bash
+output "instance_ip" {
+  value = aws_instance.example.public_ip
+}
+```
+###module → Group of Terraform files reused as a package.
+```bash
+module "vpc" {
+  source = "./modules/vpc"
+}
+```
+###locals → Define local variables.
+```bash
+locals {
+  env = "dev"
+}
+```
+
+###data → Fetch existing info (e.g., latest AMI).
+```bash
+data "aws_ami" "latest" {
+  most_recent = true
+  owners      = ["amazon"]
+}
+```
+---
 ### Terraform file that creates an EC2 instance on AWS
 ```bash
 # Define the AWS provider
