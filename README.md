@@ -38,3 +38,23 @@ This project includes:
 ├── variables.tf<br>
 ├── outputs.tf<br>
 └── main.tf<br>
+
+
+---
+
+## 🔧 Prerequisites
+
+- Ubuntu 20.04 / 22.04+
+- Git
+- AWS CLI (if deploying to AWS)
+- Terraform v1.x
+
+---
+
+## ⚙️ Install Terraform (Ubuntu)
+
+### 1️⃣ Add HashiCorp GPG Key
+
+```bash
+wget -O - https://apt.releases.hashicorp.com/gpg | \
+sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
