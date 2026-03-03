@@ -36,5 +36,5 @@ This project includes:
 ├── backend.tf<br>
 ├── providers.tf<br>
 ├── variables.tf<br>
--├── outputs.tf
-└── main.tf
+├── outputs.tf<br>
+└── main.tf<br>
