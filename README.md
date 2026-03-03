@@ -25,17 +25,16 @@ This project includes:
 
 ## 🏗️ Project Structure
 .
--├── modules/
--│ ├── vpc/
--│ ├── ec2/
--│ └── security-groups/
--├── environments/
--│ ├── dev/
--│ ├── qa/
--│ └── prod/
--├── backend.tf
--├── providers.tf
--├── variables.tf
+├── modules/<br>
+│ ├── vpc/<br>
+│ ├── ec2/<br>
+│ └── security-groups/<br>
+├── environments/<br>
+│ ├── dev/<br>
+│ ├── qa/<br>
+│ └── prod/<br>
+├── backend.tf<br>
+├── providers.tf<br>
+├── variables.tf<br>
 -├── outputs.tf
 └── main.tf
-
