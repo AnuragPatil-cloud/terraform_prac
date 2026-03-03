@@ -125,6 +125,7 @@ resource "aws_instance" "example" {
 ```
 
 ### variable → Input values (like parameters).
+
 ```bash
 variable "region" {
   default = "us-east-1"
@@ -132,18 +133,21 @@ variable "region" {
 ```
 
 ### output → Shows values after deployment.
+
 ```bash
 output "instance_ip" {
   value = aws_instance.example.public_ip
 }
 ```
 ### module → Group of Terraform files reused as a package.
+
 ```bash
 module "vpc" {
   source = "./modules/vpc"
 }
 ```
 ### locals → Define local variables.
+
 ```bash
 locals {
   env = "dev"
@@ -151,6 +155,7 @@ locals {
 ```
 
 ### data → Fetch existing info (e.g., latest AMI).
+
 ```bash
 data "aws_ami" "latest" {
   most_recent = true
