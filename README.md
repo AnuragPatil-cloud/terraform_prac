@@ -50,30 +50,10 @@ This project includes:
 - Terraform v1.x
 
 ---
-2️⃣ Add Official Repository
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | \
-sudo tee /etc/apt/sources.list.d/hashicorp.list
-3️⃣ Install Terraform
-sudo apt update
-sudo apt install terraform -y
-4️⃣ Verify Installation
-terraform -version
-🚀 Usage
-Initialize Terraform
-terraform init
-Validate Configuration
-terraform validate
-Plan Infrastructure Changes
-terraform plan
-Apply Changes
-terraform apply
-Destroy Infrastructure
-terraform destroy
-
-## ⚙️ Install Terraform (Ubuntu)
 
 ### 1️⃣ Add HashiCorp GPG Key
-
 ```bash
 wget -O - https://apt.releases.hashicorp.com/gpg | \
 sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+
