@@ -56,4 +56,39 @@ This project includes:
 wget -O - https://apt.releases.hashicorp.com/gpg | \
 sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 
+2️⃣ Add Official Repository
+```bash
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | \
+sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+3️⃣ Install Terraform
+```bash
+sudo apt update
+sudo apt install terraform -y
+
+4️⃣ Verify Installation
+```bash
+terraform -version
+
+🚀 Usage
+Initialize Terraform
+```bash
+terraform init
+
+Validate Configuration
+```bash
+terraform validate
+
+Plan Infrastructure Changes
+```bash
+terraform plan
+
+Apply Changes
+```bash
+terraform apply
+
+Destroy Infrastructure
+```bash
+terraform destroy
+
 
