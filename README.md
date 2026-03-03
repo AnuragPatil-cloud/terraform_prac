@@ -180,4 +180,7 @@ resource "aws_instance" "my_ec2" {
 
 
 ```
+---
+
+### Terraform file that creates a security group on AWS
 
