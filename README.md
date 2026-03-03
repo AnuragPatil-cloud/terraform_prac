@@ -66,48 +66,58 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashi
 sudo tee /etc/apt/sources.list.d/hashicorp.list
 ```
 <br>
-###3️⃣ Install Terraform
+
+### 3️⃣ Install Terraform
+
 
 ```bash
 sudo apt update
 sudo apt install terraform -y
 ```
 <br>
-###4️⃣ Verify Installation
+
+### 4️⃣ Verify Installation
 
 ```bash
 terraform -version
 ```
 <br>
 
-###🚀 Usage
+### 🚀 Usage
+
 Initialize Terraform
+
 ```bash
 terraform init
 ```
 
 Validate Configuration
+
 ```bash
 terraform validate
 ```
 
 Plan Infrastructure Changes
+
 ```bash
 terraform plan
 ```
 
 Apply Changes
+
 ```bash
 terraform apply
 ```
 
 Destroy Infrastructure
+
 ```bash
 terraform destroy
 ```
 ---
  ## Enlist the Blocks used in Terraform Language
-###Terraform has multiple blocks (building units):
+ 
+### Terraform has multiple blocks (building units):
 
 ### provider → Defines the provider (AWS, Azure, etc.)
 ```bash
