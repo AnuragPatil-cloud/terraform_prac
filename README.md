@@ -1,5 +1,27 @@
 # terraform_prac
-Terraform Instalation
-wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update && sudo apt install terraform
+# 🚀 Terraform Infrastructure as Code
+
+![Terraform](https://img.shields.io/badge/IaC-Terraform-623CE4?logo=terraform&logoColor=white)
+![Maintained](https://img.shields.io/badge/Maintained-Yes-success)
+![License](https://img.shields.io/badge/License-MIT-blue)
+
+Infrastructure provisioning and management using Terraform by HashiCorp.
+
+This repository follows Infrastructure as Code (IaC) best practices to provision and manage cloud resources in a scalable, modular, and reusable way.
+
+---
+
+## 📌 Project Overview
+
+This project includes:
+
+- ✅ Modular Terraform structure  
+- ✅ Environment-based configurations (Dev / QA / Prod)  
+- ✅ Remote backend support  
+- ✅ State management best practices  
+- ✅ Secure variable handling  
+
+---
+
+## 🏗️ Project Structure
+
