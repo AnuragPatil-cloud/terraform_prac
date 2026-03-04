@@ -336,6 +336,6 @@ output "security_group_id" {
   value = aws_security_group.web_sg.id
 }
 ```
-<span style="border:1px solid black; padding:4px;">
-value
-</span>: Specifies the attribute to output.
+<div style="border:2px solid #007acc; padding:10px; border-radius:8px;">
+<strong>value</strong> 
+</div>: Specifies the attribute to output.
