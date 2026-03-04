@@ -609,6 +609,7 @@ resource "aws_instance" "app" {
                  )
 }
 
+
 # ---------------- Target Group ----------------
 resource "aws_lb_target_group" "tg" {
   name     = "alb-target-group"
