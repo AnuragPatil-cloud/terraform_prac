@@ -611,3 +611,18 @@ resource "aws_lb_target_group_attachment" "attach" {
   port             = 80
 }
 ```
+🔹 outputs.tf
+```bash
+output "load_balancer_dns" {
+  value = aws_lb.alb.dns_name
+}
+```
+
+🚀 Step 4: Initialize & Deploy
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+After apply, Terraform will output:
+**load_balancer_dns = http://xxxx.ap-south-1.elb.amazonaws.com**
