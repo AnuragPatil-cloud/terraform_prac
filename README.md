@@ -337,7 +337,7 @@ output "security_group_id" {
 }
 ```
 -**`value`**: Specifies the attribute to output.
-
+---
  Applying the Script
 
 ### Steps:
