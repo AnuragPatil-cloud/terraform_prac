@@ -234,4 +234,106 @@ resource "aws_security_group" "web_sg" {
 }
 
 ```
+---
+ ### HEREDOC in UserData
+What is HEREDOC?
+HEREDOC (Here Document) is a multi-line string syntax in Terraform used to define large blocks of text or commands. It is often utilized in UserData to pass startup scripts to cloud instances.
 
+Example with UserData
+Below is an example of using HEREDOC within an EC2 instance resource
+
+```bash
+resource "aws_instance" "web_server" {
+  ami           = "ami-12345678"
+  instance_type = "t2.micro"
+
+  user_data = <<-EOF
+    #!/bin/bash
+    yum update -y
+    yum install -y httpd
+    echo "Hello, World!" > /var/www/html/index.html
+    systemctl start httpd
+    systemctl enable httpd
+  EOF
+
+  tags = {
+    Name = "web-server"
+  }
+}
+
+```
+### Another Example:
+
+```bash
+user_data = <<EOF
+  ${file("index.sh")}
+  EOF
+
+```
+### HEREDOC Syntax
+<<-EOF: Begins the HEREDOC. 
+-The - allows indentation.
+-Content: The script or text.
+-EOF: Ends the HEREDOC block.
+---
+
+### Key Blocks in the Terraform Script
+
+Provider Block
+The provider block specifies the cloud provider to manage resources.
+
+Example:
+```bash
+provider "aws" {
+  region = "us-east-1"
+}
+```
+
+region: Defines the AWS region for resource deployment.
+
+### Resource Block
+The resource block defines the actual infrastructure components.
+
+Example:
+```bash
+resource "aws_security_group" "web_sg" {
+  name_prefix = "web-sg-"
+  description = "Allow inbound HTTP and SSH traffic"
+}
+```
+name_prefix: Prefix for the Security Group name.
+ingress/egress: Rules for inbound and outbound traffic.
+
+### Variable Block
+The variable block is used to parameterize values, making the script reusable.
+
+Example:
+```bash
+variable "region" {
+  default = "us-east-1"
+}
+```
+default: Specifies a default value.
+
+### Data Block
+The data block retrieves existing resources.
+
+Example:
+```bash
+data "aws_ami" "latest" {
+  most_recent = true
+  owners      = ["self"]
+}
+```
+most_recent: Fetches the latest AMI.
+
+### Output Block
+The output block displays resource attributes after execution.
+
+Example:
+```bash
+output "security_group_id" {
+  value = aws_security_group.web_sg.id
+}
+```
+value: Specifies the attribute to output.
