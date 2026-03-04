@@ -301,7 +301,7 @@ resource "aws_security_group" "web_sg" {
   description = "Allow inbound HTTP and SSH traffic"
 }
 ```
-name_prefix: Prefix for the Security Group name.
+name_prefix: Prefix for the Security Group name.<br>
 ingress/egress: Rules for inbound and outbound traffic.
 
 ### Variable Block
