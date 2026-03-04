@@ -364,7 +364,7 @@ output "security_group_id" {
 5. Verify the Security Group in the AWS Console.
 ---
 ## Security group + Heredoc Hands-on .tf file
-```hcl
+```bash
 provider "aws" {
   region = "ap-south-1"
 }
@@ -372,56 +372,60 @@ provider "aws" {
 variable "instance_type" {
   default = "t3.micro"
 }
+
 variable "ami_id" {
   default = "ami-019715e0d74f695be"
 }
 
 resource "aws_instance" "my-ec2" {
-  ami = var.ami_id
+  ami           = var.ami_id
   instance_type = var.instance_type
   security_groups = [aws_security_group.security.name]
-  user_data = base64encode(<<-EOF 
-      #!/bin/bash
-      sudo apt update -y
-      sudo apt install nginx -y 
-      echo "Hello World from Terraform" > /var/www/html/index.html
-      systemctl start nginx
-      systemctl enable nginx
-  EOF
+
+  user_data = base64encode(<<-EOF
+#!/bin/bash
+sudo apt update -y
+sudo apt install nginx -y
+echo "Hello World from Terraform" > /var/www/html/index.html
+sudo systemctl start nginx
+sudo systemctl enable nginx
+EOF
   )
-tags = {
+
+  tags = {
     Name = "MyEC2Instance"
   }
 }
+
 resource "aws_security_group" "security" {
-  name = "my-sg"
+  name        = "my-sg"
   description = "Allow SSH and HTTP traffic"
 
   ingress {
-    from_port = 22
-    to_port = 22
-    protocol = "tcp"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    from_port = 80
-    to_port = 80  
-    protocol = "tcp"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
 
 output "public_ip" {
   value = aws_instance.my-ec2.public_ip
 }
+
 ```
 
