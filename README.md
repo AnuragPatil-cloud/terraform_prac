@@ -570,12 +570,13 @@ resource "aws_instance" "app" {
     Name = "My_EC2"
   }
 
-  user_data = <<-EOF
+  user_data = base64encode(<<-EOF
               #!/bin/bash
               yum install -y httpd
               systemctl start httpd
               echo "Hello from Terraform ALB" > /var/www/html/index.html
               EOF
+                 )
 }
 
 # Target Group
