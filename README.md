@@ -428,4 +428,84 @@ output "public_ip" {
 }
 
 ```
+---
+# 🚀 AWS Application Load Balancer using Terraform
 
+## 📌 Project Overview
+
+This project provisions an **AWS Application Load Balancer (ALB)** with:
+
+* Custom VPC
+* Public Subnets
+* Internet Gateway
+* Security Group
+* EC2 Instance (Apache Installed)
+* Target Group
+* ALB Listener
+
+Region: `ap-south-1`
+
+---
+
+## 🏗️ Architecture
+
+EC2 → Target Group → Application Load Balancer → Internet
+
+---
+
+## ⚙️ Prerequisites
+
+* Terraform installed
+* AWS CLI configured
+* AWS IAM user with required permissions
+
+---
+
+## 📂 Project Structure
+
+```
+aws-alb-terraform/
+│── main.tf
+│── outputs.tf
+│── terraform.tfvars
+```
+
+---
+
+## 🚀 Deployment Steps
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+---
+
+## 🌐 Access Application
+
+After deployment, Terraform outputs:
+
+```
+load_balancer_dns = <ALB DNS>
+```
+
+Open the DNS in browser to access the application.
+
+---
+
+## 🧹 Destroy Resources
+
+```bash
+terraform destroy
+```
+
+---
+
+## 🛠️ Technologies Used
+
+* AWS
+* Terraform
+* EC2
+* Application Load Balancer
+* Apache HTTP Server
