@@ -566,6 +566,9 @@ resource "aws_instance" "app" {
   instance_type = "t3.micro"
   subnet_id     = aws_subnet.subnet1.id
   security_groups = [aws_security_group.alb_sg.id]
+   tags = {
+    Name = "My_EC2"
+  }
 
   user_data = <<-EOF
               #!/bin/bash
