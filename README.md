@@ -518,36 +518,67 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-# VPC
+# ---------------- VPC ----------------
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
 }
 
-# Subnets
-resource "aws_subnet" "subnet1" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "ap-south-1a"
-}
-
-resource "aws_subnet" "subnet2" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.2.0/24"
-  availability_zone = "ap-south-1b"
-}
-
-# Internet Gateway
+# ---------------- Internet Gateway ----------------
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 }
 
-# Security Group
+# ---------------- Public Subnet 1 ----------------
+resource "aws_subnet" "subnet1" {
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "10.0.1.0/24"
+  availability_zone       = "ap-south-1a"
+  map_public_ip_on_launch = true
+}
+
+# ---------------- Public Subnet 2 ----------------
+resource "aws_subnet" "subnet2" {
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "10.0.2.0/24"
+  availability_zone       = "ap-south-1b"
+  map_public_ip_on_launch = true
+}
+
+# ---------------- Route Table ----------------
+resource "aws_route_table" "rt" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.gw.id
+  }
+}
+
+# Associate Route Table
+resource "aws_route_table_association" "a1" {
+  subnet_id      = aws_subnet.subnet1.id
+  route_table_id = aws_route_table.rt.id
+}
+
+resource "aws_route_table_association" "a2" {
+  subnet_id      = aws_subnet.subnet2.id
+  route_table_id = aws_route_table.rt.id
+}
+
+# ---------------- Security Group ----------------
 resource "aws_security_group" "alb_sg" {
   vpc_id = aws_vpc.main.id
 
   ingress {
     from_port   = 80
     to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -560,26 +591,24 @@ resource "aws_security_group" "alb_sg" {
   }
 }
 
-# EC2 Instance
+# ---------------- EC2 Instance ----------------
 resource "aws_instance" "app" {
-  ami           = "ami-019715e0d74f695be"
-  instance_type = "t3.micro"
-  subnet_id     = aws_subnet.subnet1.id
-  security_groups = [aws_security_group.alb_sg.id]
-   tags = {
-    Name = "My_EC2"
-  }
+  ami                         = "ami-019715e0d74f695be"
+  instance_type               = "t3.micro"
+  subnet_id                   = aws_subnet.subnet1.id
+  vpc_security_group_ids      = [aws_security_group.alb_sg.id]
+  associate_public_ip_address = true
 
-  user_data = base64encode(<<-EOF
+  user_data = <<-EOF
               #!/bin/bash
               yum install -y httpd
               systemctl start httpd
+              systemctl enable httpd
               echo "Hello from Terraform ALB" > /var/www/html/index.html
               EOF
-                 )
 }
 
-# Target Group
+# ---------------- Target Group ----------------
 resource "aws_lb_target_group" "tg" {
   name     = "alb-target-group"
   port     = 80
@@ -587,7 +616,7 @@ resource "aws_lb_target_group" "tg" {
   vpc_id   = aws_vpc.main.id
 }
 
-# Load Balancer
+# ---------------- ALB ----------------
 resource "aws_lb" "alb" {
   name               = "terraform-alb"
   internal           = false
@@ -596,10 +625,10 @@ resource "aws_lb" "alb" {
   subnets            = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
 }
 
-# Listener
+# ---------------- Listener ----------------
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_lb.alb.arn
-  port              = "80"
+  port              = 80
   protocol          = "HTTP"
 
   default_action {
@@ -614,7 +643,12 @@ resource "aws_lb_target_group_attachment" "attach" {
   target_id        = aws_instance.app.id
   port             = 80
 }
+
+output "load_balancer_dns" {
+  value = aws_lb.alb.dns_name
+}
 ```
+
 🔹 outputs.tf
 ```bash
 output "load_balancer_dns" {
