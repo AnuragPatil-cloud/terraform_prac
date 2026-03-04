@@ -280,7 +280,7 @@ user_data = <<EOF
 ### Key Blocks in the Terraform Script
 
 Provider Block
-The **'provider'** block specifies the cloud provider to manage resources.
+The **`provider`** block specifies the cloud provider to manage resources.
 
 Example:
 ```bash
@@ -289,10 +289,10 @@ provider "aws" {
 }
 ```
 
-**'region'**: Defines the AWS region for resource deployment.
+**`region`**: Defines the AWS region for resource deployment.
 
 ### Resource Block
-The **'resource block'** defines the actual infrastructure components.
+The **`resource block`** defines the actual infrastructure components.
 
 Example:
 ```bash
@@ -301,11 +301,11 @@ resource "aws_security_group" "web_sg" {
   description = "Allow inbound HTTP and SSH traffic"
 }
 ```
-**'name_prefix'**: Prefix for the Security Group name.<br>
-**'ingress'**/**'egress'**: Rules for inbound and outbound traffic.
+**`name_prefix`**: Prefix for the Security Group name.<br>
+**`ingress`**/**`egress`**: Rules for inbound and outbound traffic.
 
 ### Variable Block
-The **'variable'** block is used to parameterize values, making the script reusable.
+The **`variable`** block is used to parameterize values, making the script reusable.
 
 Example:
 ```bash
@@ -313,7 +313,7 @@ variable "region" {
   default = "us-east-1"
 }
 ```
--**'default'**: Specifies a default value.
+-**`default`**: Specifies a default value.
 
 ### Data Block
 The data block retrieves existing resources.
