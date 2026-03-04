@@ -599,13 +599,14 @@ resource "aws_instance" "app" {
   vpc_security_group_ids      = [aws_security_group.alb_sg.id]
   associate_public_ip_address = true
 
-  user_data = <<-EOF
+  user_data =  base64encode(<<-EOF
               #!/bin/bash
               yum install -y httpd
               systemctl start httpd
               systemctl enable httpd
               echo "Hello from Terraform ALB" > /var/www/html/index.html
               EOF
+                 )
 }
 
 # ---------------- Target Group ----------------
