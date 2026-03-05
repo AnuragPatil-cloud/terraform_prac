@@ -90,11 +90,17 @@ provider "aws" {
 # ---------------- VPC ----------------
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
+tags = {
+    Name = "Main"
+  }
 }
 
 # ---------------- Internet Gateway ----------------
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
+tags = {
+    Name = "I_gw"
+  }
 }
 
 # ---------------- Public Subnet 1 ----------------
@@ -103,6 +109,9 @@ resource "aws_subnet" "subnet1" {
   cidr_block              = "10.0.1.0/24"
   availability_zone       = "ap-south-1a"
   map_public_ip_on_launch = true
+tags = {
+    Name = "subnet1"
+  }
 }
 
 # ---------------- Public Subnet 2 ----------------
@@ -111,6 +120,9 @@ resource "aws_subnet" "subnet2" {
   cidr_block              = "10.0.2.0/24"
   availability_zone       = "ap-south-1b"
   map_public_ip_on_launch = true
+tags = {
+    Name = "subnet2"
+  }
 }
 
 # ---------------- Route Table ----------------
@@ -120,6 +132,9 @@ resource "aws_route_table" "rt" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.gw.id
+  }
+tags = {
+    Name = "rt"
   }
 }
 
@@ -158,6 +173,9 @@ resource "aws_security_group" "alb_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+tags = {
+    Name = "sg_load_balancer"
+  }
 }
 
 # ---------------- EC2 Instance ----------------
@@ -177,6 +195,9 @@ resource "aws_instance" "app" {
     echo "Hello from Terraform ALB" > /var/www/html/index.html
     EOF
       )
+tags = {
+    Name = "app"
+  }
 }
 
 # ---------------- Target Group ----------------
@@ -194,6 +215,9 @@ resource "aws_lb" "alb" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
   subnets            = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
+tags = {
+    Name = "ALB"
+  }
 }
 
 # ---------------- Listener ----------------
