@@ -215,9 +215,7 @@ resource "aws_lb" "alb" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
   subnets            = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
-tags = {
-    Name = "ALB"
-  }
+
 }
 
 # ---------------- Listener ----------------
