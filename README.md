@@ -599,16 +599,16 @@ resource "aws_instance" "app" {
   vpc_security_group_ids      = [aws_security_group.alb_sg.id]
   associate_public_ip_address = true
 
-  user_data =  base64encode(<<-EOF
-              #!/bin/bash
-              yum install -y httpd
-              systemctl start httpd
-              systemctl enable httpd
-              echo "Hello from Terraform ALB" > /var/www/html/index.html
-              EOF
-                 )
+   user_data = base64encode(<<-EOF
+    #!/bin/bash
+    apt-get update -y
+    apt-get install -y apache2
+    systemctl start apache2
+    systemctl enable apache2
+    echo "Hello from Terraform ALB" > /var/www/html/index.html
+    EOF
+      )
 }
-
 
 # ---------------- Target Group ----------------
 resource "aws_lb_target_group" "tg" {
@@ -646,9 +646,7 @@ resource "aws_lb_target_group_attachment" "attach" {
   port             = 80
 }
 
-output "load_balancer_dns" {
-  value = aws_lb.alb.dns_name
-}
+
 ```
 
 🔹 outputs.tf
