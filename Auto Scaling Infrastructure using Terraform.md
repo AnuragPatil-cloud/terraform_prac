@@ -2,8 +2,8 @@
 
 ![Terraform](https://img.shields.io/badge/IaC-Terraform-623CE4?logo=terraform)
 ![AWS](https://img.shields.io/badge/Cloud-AWS-orange?logo=amazonaws)
-![GitHub Repo stars](https://img.shields.io/github/stars/your-username/terraform-alb-autoscaling)
-![GitHub forks](https://img.shields.io/github/forks/your-username/terraform-alb-autoscaling)
+![GitHub Repo stars](https://img.shields.io/github/stars/AnuragPatil-cloud/terraform_prac)
+![GitHub forks](https://img.shields.io/github/forks/AnuragPatil-cloud/terraform_prac)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 ---
