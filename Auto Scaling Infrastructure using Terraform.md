@@ -82,6 +82,12 @@ Before running this project, install:
 
 Configure AWS credentials:
 
+Install AWS CLI on Ubuntu
+Download the aws cli bundle using below command
+```
+
+```
+
 ```
 aws configure
 ```
