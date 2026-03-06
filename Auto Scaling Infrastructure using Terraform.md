@@ -81,7 +81,7 @@ Before running this project, install:
 * Git
 
 ---
-Configure AWS credentials:
+### Configure AWS credentials:
 
 Install AWS CLI on Ubuntu <br>
 Download the aws cli bundle using below command
