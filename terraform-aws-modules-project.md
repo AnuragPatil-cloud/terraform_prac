@@ -105,7 +105,7 @@ Before running this project install:
 * AWS Account
 
 ---
-### Install AWS CLI on Ubuntu
+# Install AWS CLI on Ubuntu
 
 Download the aws cli bundle using below command
 ```
