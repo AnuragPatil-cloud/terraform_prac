@@ -18,12 +18,6 @@ This setup is commonly used in **real DevOps production environments**.
 
 ---
 
-# Architecture Diagram
-
-![Architecture](https://miro.medium.com/v2/resize\:fit:1400/1*F5pJYtG6HC8K3vpYJwcYqA.png)
-
----
-
 # AWS Services Used
 
 | Service                                                                  | Description                                        |
@@ -223,14 +217,6 @@ resource "aws_autoscaling_group" "asg" {
 
 # Deployment Steps
 
-### Clone Repository
-
-```
-git clone https://github.com/your-username/terraform-aws-alb-autoscaling.git
-cd terraform-aws-alb-autoscaling
-```
-
----
 
 ### Initialize Terraform
 
@@ -305,4 +291,4 @@ terraform destroy
 **Anurag**
 
 DevOps Engineer
-AWS | Terraform | Docker | Kubernetes | CI/CD
+AWS | Terraform 
