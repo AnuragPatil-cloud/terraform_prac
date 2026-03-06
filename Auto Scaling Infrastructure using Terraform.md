@@ -80,6 +80,7 @@ Before running this project, install:
 * AWS Account
 * Git
 
+---
 Configure AWS credentials:
 
 Install AWS CLI on Ubuntu <br>
